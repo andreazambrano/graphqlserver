@@ -1,3 +1,5 @@
+//const util = require('util');
+//const TextEncoder = new util.TextEncoder();
 const mongoose = require ("mongoose");
 const { ApolloServer}= require("apollo-server");
 const typeDefs = require("./gql/schema");
