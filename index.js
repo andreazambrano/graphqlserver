@@ -1,9 +1,13 @@
-//const util = require('util');
-//const TextEncoder = new util.TextEncoder();
+const util = require('util');
+const TextEncoder = new util.TextEncoder();
 const mongoose = require ("mongoose");
 const { ApolloServer}= require("apollo-server");
 const typeDefs = require("./gql/schema");
 const resolvers = require("./gql/resolver"); 
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
+
+//import { ApolloServer } from "apollo-server";
+//import {  ApolloServerPluginLandingPageGraphQLPlayground} from "apollo-server-core";
 require ("dotenv").config({path:".env"});
 
 mongoose.connect(process.env.BBDD,
@@ -28,6 +32,12 @@ function server () {
     const serverApollo = new ApolloServer({
         typeDefs,
         resolvers,
+         plugins: [
+            ApolloServerPluginLandingPageGraphQLPlayground({
+              // options
+            })
+          ] 
+
     });   
     serverApollo.listen().then(({url})=>{
         console.log(`Server ON, ${url}`);            
